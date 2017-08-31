@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>Budgeting App</title>
+        <link rel="icon" href="./images/dollaSign.png" type="image/x-icon">
+        <!-- import scripts through bundle.js-->
+        <script type="text/javascript" src="./bundle.js" charset="utf-8"></script>
+        <script>
+            //this script controls page headers
+            var app = angular.module('budgetApp').controller('indexController', ['$scope', '$location',
+              function($scope, $location) {    
+                if ($location.path() === '/') $scope.currPg = 'Home';
+                if ($location.path() === '/income') $scope.currPg = 'Income';
+                if ($location.path() === '/expenses') $scope.currPg = 'Expenses';
+                if ($location.path() === '/overview') $scope.currPg = 'Overview';
+                $scope.changeLoc = function(loc) {
+                    if ($location.path() == '/') $scope.currPg = 'Home';
+                    $scope.currPg = loc;
+                }
+            }]);
+        </script>
+    </head>
+    
+    <body ng-app="budgetApp" ng-controller="indexController">
+        <div class="container">
+            <ul class="nav nav-pills">
+                <li><a data-toggle="tab" href="#" ng-click="changeLoc('Home')">Home</a></li>
+                <li><a data-toggle="tab" href="#!income" ng-click="changeLoc('Income')">Income</a></li>
+                <li><a data-toggle="tab" href="#!expenses" ng-click="changeLoc('Expenses')">Expenses</a></li>
+                <li><a data-toggle="tab" href="#!overview" ng-click="changeLoc('Overview')">Overview</a></li>            
+            </ul>
+        </div>
+        <div class="container" style="color:chartreuse;">
+            <div class="page-header">
+                <h1>Welcome to {{currPg}} page. Dolla Dolla Bill Yaaaaa!</h1>
+            </div>
+        </div>
+        <div class="container">
+           <div ng-view></div> 
+        </div>
+        
+    </body>
+</html>

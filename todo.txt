@@ -1,0 +1,15 @@
+1. should be able to calc weekly, monthly, yearly expenditures
+
+2. budgeting categories: subcategories
+    a. food: tips
+    b. entertainment: movies, games, misc
+    c. travel: gas, plane tix
+    d. hehe
+    e.
+
+3. views/controllers:
+    a. weekly
+    b. monthly
+    c. yearly
+    d. budget entry
+    e. budget viewer
