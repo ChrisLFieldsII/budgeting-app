@@ -14,7 +14,7 @@ var app = angular.module('budgetApp', ['ngRoute']);
 
 //create controllers
 app.controller('homeController', ['$scope', '$http', homeController]);
-app.controller('incomeController', ['$scope', incomeController]);
+app.controller('incomeController', ['$scope', '$http', incomeController]);
 app.controller('expensesController', ['$scope', expensesController]);
 app.controller('overviewController', ['$scope', overviewController]);
 

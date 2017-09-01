@@ -1,4 +1,24 @@
-<form method="POST" action="http://localhost:8080/income">
-    <!-- need number and select for way money made  -->
-    <input type="submit" value="Submit">
+<form autocomplete="on">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="form-group col-lg-4">
+                <label>Enter income: <input type="number" ng-model="income" min="0" autofocus></label>
+            </div> 
+            <div class="form-group col-lg-8">
+                <label>Enter date: <input type="date" ng-model="date"></label>
+            </div>
+        </div> <!--end first row-->
+
+        <div class="row">
+            <div class="form-group col-lg-12">
+                <input type="email" name="" id="">
+            </div>
+        </div> <!--end second row-->
+
+
+        
+    
+        <input type="button" value="Submit" ng-click="submit()" class="btn-primary">
+    </div>
+    
 </form>

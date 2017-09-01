@@ -4,11 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const wpServer = require('./config/client/wpServer.json');
 
 module.exports = {
-    entry: [
-        "webpack-dev-server/client?http://127.0.0.1:"+wpServer.port+"/",
-        "webpack/hot/only-dev-server",
-        './public/app.js'
-    ],
+    entry: './public/app.js',
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js',
