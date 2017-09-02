@@ -1,24 +1,23 @@
 <form autocomplete="on">
     <div class="container-fluid">
-        <div class="row">
-            <div class="form-group col-lg-4">
-                <label>Enter income: <input type="number" ng-model="income" min="0" autofocus></label>
-            </div> 
-            <div class="form-group col-lg-8">
-                <label>Enter date: <input type="date" ng-model="date"></label>
-            </div>
-        </div> <!--end first row-->
+        <div class="form-group">
+            <label>Enter income: <input type="number" class="form-control" ng-model="income" min="0" required autofocus></label>
+        </div> 
+        <div class="form-group">
+            <label>Enter date: <input type="date" class="form-control" ng-model="date" required></label>
+        </div>
 
-        <div class="row">
-            <div class="form-group col-lg-12">
-                <input type="email" name="" id="">
-            </div>
-        </div> <!--end second row-->
-
-
-        
-    
+        <div class="form-group">
+            <label>Income Category: 
+                <select class="form-control" ng-model="category" required>
+                    <option value="Job">Job</option>
+                    <option value="Hustling">Hustling</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Description: <input type="text" class="form-control" ng-model="desc" required></label>
+        </div>
         <input type="button" value="Submit" ng-click="submit()" class="btn-primary">
-    </div>
-    
+    </div>    
 </form>

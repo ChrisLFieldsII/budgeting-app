@@ -1,10 +1,64 @@
-module.exports = function($scope, $http) { //might not need $http
-    $scope.income = 10000;
-    $scope.date = '';
-    $scope.submit = function() {
-        log([$scope.income, $scope.date]);
+module.exports = function($scope, $http) { 
+    $scope.income = 0;
+    $scope.date = new Date();
+    $scope.category = 'job'; //defaulting to job
+    $scope.desc = 'desc';
+
+    $scope.submit = function() {                
+        $scope.incomeObj = {
+            income: $scope.income,
+            date: formatDate($scope.date),
+            category: $scope.category,
+            desc: $scope.desc
+        };
+        console.log($scope.incomeObj);
+        $http.post('/income/', $scope.incomeObj).then(function success(res) {
+            console.log('successfully post income obj');
+            console.log(res);
+        }, function error(res) {
+            console.error('failed to post income obj');
+        });
     }
 
+    //Ex format: Fri 9-1-2017
+    function formatDate(date) {
+        day = date.getDay();
+        switch (day) {
+            case 0:
+                day = 'Sun';
+                break;
+            case 1:
+                day = 'Mon';
+                break;
+            case 2:
+                day = 'Tue';
+                break;
+            case 3:
+                day = 'Wed';
+                break;
+            case 4:
+                day = 'Thur';
+                break;
+            case 5:
+                day = 'Fri';
+                break;
+            case 6:
+                day = 'Sat';
+                break;
+        }
+
+        var month = date.getMonth();
+        month += 1;
+
+        var dayNum = date.getDate()
+
+        var year = date.getFullYear();
+        return day + ' ' + month + '-' + dayNum + '-' + year;
+    }
+    
+    
+    
+    
     function log(msgs) {
         numMsgs = msgs.length;
         for (i = 0; i < numMsgs; i++) {

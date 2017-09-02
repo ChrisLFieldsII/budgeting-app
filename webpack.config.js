@@ -26,7 +26,10 @@ module.exports = {
         new CopyWebpackPlugin([
             {from: 'public'}
         ]),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        })
     ],
     devServer: {
         contentBase: path.join(__dirname, 'dist'),

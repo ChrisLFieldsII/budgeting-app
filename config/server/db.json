@@ -1,6 +1,8 @@
 {
     "db_url": "mongodb://localhost:27017/budgetingapp",
     "db_colls": {
-        "budgeting_coll": "budget"
+        "budgeting_coll": "budget",
+        "income_coll": "income",
+        "expense_coll": "expense"
     }
 }

@@ -4,16 +4,14 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 //logger
-const log4js = require('log4js');
-log4js.configure(require('../config/server/log4js'));
-const logger = log4js.getLogger('serverLogger');
+const logger = require('./logger.js');
 
 //mongodb
 const dbConfig = require('../config/server/db.json');
 const mongoose = require('mongoose');
 mongoose.connect(dbConfig.db_url, function(err) {
     if (err) logger.fatal('failed to connect to db');
-    else logger.info('connected!');
+    else logger.info('db connected!');
 });
 
 //create app/server instance
@@ -25,12 +23,11 @@ app.use(express.static(path.join(__dirname, '../public'))); //enable server to u
 app.use(express.static(path.join(__dirname, '../dist'))); //enable server to use files from dist folder
 app.use(bodyParser.json());
 
-logger.info('__dirname -> '+__dirname);
+//router paths
+app.use('/income/', require('./routes/incomeRoute.js'));
+app.use('/expense/', require('./routes/expenseRoute.js'));
 
-//handle server reqs
-app.post('/income', function(req, res) {
-    res.send('post res to income req')
-});
+logger.info('__dirname -> '+__dirname);
 
 //catch 404 error
 app.use(function (req, res, next) {
@@ -43,7 +40,7 @@ app.use(function (err, req, res, next) {
     res.status(500).send('Something broke!')
 });
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 5000;
 app.listen(port, function() {
     logger.info('Magic happening on port '+port);
 });
