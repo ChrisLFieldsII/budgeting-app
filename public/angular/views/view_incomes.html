@@ -1,7 +1,17 @@
 <div class="panel-group">
+    <form class="form-inline">
+        <div class="form-group">
+            <label>Select incomes from: <input type="date" ng-model="fromDate" class="form-control" required></label>
+        </div>
+        <div class="form-group">
+                <label>Select incomes to: <input type="date" ng-model="toDate" class="form-control" required></label>
+        </div>
+        <input type="button" value="Search" class="btn btn-primary" ng-click="search()">
+        <input type="button" value="Search All" class="btn btn-primary" ng-click="searchAll()">
+    </form>
     <div class="panel panel-info" ng-repeat="doc in incomes">
         <div class="panel-body" >
-            <b>Income:</b> ${{doc.income}} || <b>Date:</b> {{doc.date}} || <b>Category:</b> {{doc.category}} || <b>Description:</b> {{doc.desc}}
+            <b>Income:</b> ${{doc.income}} || <b>Date:</b> {{doc.date | dateFilter}} || <b>Category:</b> {{doc.category}} || <b>Description:</b> {{doc.desc}}
         </div>
     </div>
 </div>

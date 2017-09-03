@@ -16,6 +16,7 @@
     "angular-route": "^1.6.5",
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
+    "bootstrap-hover-dropdown": "^2.2.1",
     "express": "^4.15.4",
     "favicons": "^4.8.6",
     "jquery": "^3.2.1",

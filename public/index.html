@@ -30,15 +30,15 @@
                 <ul class="nav navbar-nav">
                     <li><a href="#" ng-click="changeLoc('Home')">Home</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#!income" ng-click="changeLoc('Income')">Income<span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" href="#!income" ng-click="changeLoc('Income')">Income<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#!view_incomes">View Incomes</a></li>
+                            <li><a href="#!view_incomes" ng-click="changeLoc('View Incomes')">View Incomes</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#!expenses" ng-click="changeLoc('Expenses')">Expenses<span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" href="#!expenses" ng-click="changeLoc('Expenses')">Expenses<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#!view_expenses">View Expenses</a></li>
+                            <li><a href="#!view_expenses" ng-click="changeLoc('View Expenses')">View Expenses</a></li>
                         </ul>
                     </li>
                     <li><a href="#!overview" ng-click="changeLoc('Overview')">Overview</a></li>            

@@ -1,6 +1,7 @@
 //import 3rd party modules
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-hover-dropdown';
 import 'angular/angular';
 import 'angular-route/angular-route';
 
@@ -12,6 +13,9 @@ import expensesController from './angular/controllers/expensesController';
 import viewExpensesController from './angular/controllers/viewExpensesController';
 import overviewController from './angular/controllers/overviewController';
 
+//import filters
+import dateFilter from './angular/filters/dateFilter';
+
 //create app
 var app = angular.module('budgetApp', ['ngRoute']);
 
@@ -22,6 +26,9 @@ app.controller('viewIncomesController', ['$scope', '$http', viewIncomesControlle
 app.controller('expensesController', ['$scope', '$http', expensesController]);
 app.controller('viewExpensesController', ['$scope', '$http', viewExpensesController]);
 app.controller('overviewController', ['$scope', overviewController]);
+
+//create filters
+app.filter('dateFilter', dateFilter);
 
 app.config(function($routeProvider) {
     $routeProvider

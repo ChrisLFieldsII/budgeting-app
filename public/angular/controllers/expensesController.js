@@ -7,7 +7,7 @@ module.exports = function($scope, $http) {
     $scope.submit = function() {                
         $scope.expenseObj = {
             expense: $scope.expense,
-            date: formatDate($scope.date),
+            date: $scope.date,
             category: $scope.category,
             desc: $scope.desc
         };

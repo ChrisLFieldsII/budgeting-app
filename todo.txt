@@ -1,15 +1,10 @@
-1. should be able to calc weekly, monthly, yearly expenditures
+Prob 1: I want to be able to see incomes/expenses from past X days/weeks/months
+Solution 1a: store date as numbers into db. use query that filters incomes/expenses off date numbers
+             based on input
 
-2. budgeting categories: subcategories
-    a. food: tips
-    b. entertainment: movies, games, misc
-    c. travel: gas, plane tix
-    d. hehe
-    e.
 
-3. views/controllers:
-    a. weekly
-    b. monthly
-    c. yearly
-    d. budget entry
-    e. budget viewer
+
+months w/ 31 days: jan, mar, may, jul, aug, oct, dec
+months w/ 30 days: apr, jun, sep, nov
+feb has 28 days unless lear yr. 
+

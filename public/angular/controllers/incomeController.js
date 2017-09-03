@@ -1,4 +1,5 @@
 module.exports = function($scope, $http) { 
+    //console.log('example iso string date: ',new Date().toISOString())
     $scope.income = 0;
     $scope.date = new Date();
     $scope.category = 'job'; //defaulting to job
@@ -7,14 +8,14 @@ module.exports = function($scope, $http) {
     $scope.submit = function() {                
         $scope.incomeObj = {
             income: $scope.income,
-            date: formatDate($scope.date),
+            date: $scope.date.toISOString(),
             category: $scope.category,
             desc: $scope.desc
         };
-        console.log($scope.incomeObj);
+        //console.log($scope.incomeObj);
         $http.post('/income/', $scope.incomeObj).then(function success(res) {
             console.log('successfully post income obj');
-            console.log(res);
+            console.log('income res: ',res);
         }, function error(res) {
             console.error('failed to post income obj');
         });
