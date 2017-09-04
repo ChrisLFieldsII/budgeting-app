@@ -3,6 +3,8 @@ const db = dbConfig.db_url;
 const logger = require('../logger.js');
 var router = require('express').Router();
 var Income = require('../models/incomeModel');
+var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 //EXAMPLE INCOME MODEL
 // {
@@ -11,14 +13,6 @@ var Income = require('../models/incomeModel');
 //     "category": "food",
 //     "desc": "dat sushi"
 // }
-
-
-// var income = new Income({
-//     income: 50,
-//     date: 'Fri 9-1-2017', //format: Fri 9-1-2017
-//     category: 'food',
-//     desc: 'dat sushi'
-// });
 
 //-----------BASE ROUTE -> /income/-------------
 //GET METHODS
@@ -52,6 +46,29 @@ router.post('/', function(req, res) {
     income.save(function (err, income) {
         if (err) res.status(400).json(err);
         res.status(201).json(income);
+    });
+});
+
+//UPDATE METHODS
+//used to update income doc by mongoid
+router.put('/:mongoid', function(req, res) {
+    logger.info('I received PUT req on incomeRoute "/" by mongoid: '+req.params.mongoid+' with body:');
+    logger.info(req.body);
+    Income.findByIdAndUpdate(req.params.mongoid, {
+        income:req.body.income, date:req.body.date, category:req.body.category, desc:req.body.desc
+    }, {new:true}, function(err, income) {
+        if (err) res.status(500).json(err);
+        res.status(200).json(income);
+    });
+});
+
+//DELETE METHODS
+//used to delete income doc by mongoid
+router.delete('/:mongoid', function(req, res) {
+    logger.info('I received DELETE req on incomeRoute "/" by mongoid: '+req.body._id);
+    Income.findByIdAndRemove({_id:req.params.mongoid}, function(err, doc) {
+        if (err) res.status(500).json(err);
+        res.status(200).json(doc);
     });
 });
 

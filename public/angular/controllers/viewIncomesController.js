@@ -1,10 +1,14 @@
 module.exports = function($scope, $http) {
     $scope.fromDate = null;
     $scope.toDate = new Date();
-    
+
+    var isoDate = new Date().toISOString();
+    console.log(isoDate);
+    console.log(new Date(isoDate.slice(0,10))); //2015-03-25T12:00:00-06:30
+
     var getIncomes = function() {
         $http.get('/income/').then(function success(res) { 
-            $scope.doc = '';  
+            $scope.doc = '';              
             $scope.incomes = res.data;         
             console.log('successfully got all income docs');
         }, function error(res) {
@@ -29,5 +33,49 @@ module.exports = function($scope, $http) {
         }, function error(res) {
             console.log('view incomes search error');
         });
+    }
+
+    $scope.edit = function(index) {
+        $('#submit'+index).prop('disabled', false); //enable submit btn 
+        $('#edit'+index).prop('disabled', true); 
+        $('#income'+index).prop('readonly', false); //remove readonly property
+        $('#date'+index).prop('readonly', false).prop('type', 'date');
+        $('#category'+index).prop('disabled', false);
+        $('#desc'+index).prop('readonly', false);        
+    }
+
+    $scope.submit = function(index, id) {
+        $('#submit'+index).prop('disabled', true);
+        $('#edit'+index).prop('disabled', false); //enable edit btn 
+        $('#income'+index).prop('readonly', true);
+        $('#date'+index).prop('readonly', true).prop('type', 'text');
+        $('#category'+index).prop('disabled', true);
+        $('#desc'+index).prop('readonly', true);        
+        var editedObj = {
+            income:$('#income'+index).val(),
+            date:$('#date'+index).val(),
+            category:$('#category'+index).val(),
+            desc:$('#desc'+index).val()
+        }
+        $http.put('/income/'+id, editedObj).then(function success(res) {
+            console.log('edit res',res);
+            console.log('edit success');
+        }, function error(res) {
+            console.log('edit error');
+        });     
+        console.log('successfully edited with db id: ',id);        
+    }
+
+    $scope.delete = function(id) {
+        if (confirm('Delete income doc?')) {
+            console.log('deleted income doc with db id: ',id);
+            $http.delete('/income/'+id).then(function success(res) {
+                if ($scope.fromDate === null) $scope.searchAll();
+                else $scope.search();
+                console.log('income delete success');
+            }, function error(res) {
+                console.log('income delete error');
+            });
+        }
     }
 }

@@ -15,6 +15,7 @@ import overviewController from './angular/controllers/overviewController';
 
 //import filters
 import dateFilter from './angular/filters/dateFilter';
+import isoFilter from './angular/filters/isoFilter';
 
 //create app
 var app = angular.module('budgetApp', ['ngRoute']);
@@ -28,7 +29,8 @@ app.controller('viewExpensesController', ['$scope', '$http', viewExpensesControl
 app.controller('overviewController', ['$scope', overviewController]);
 
 //create filters
-app.filter('dateFilter', dateFilter);
+app.filter('dateFilter', dateFilter); //useless ATM
+app.filter('isoFilter', isoFilter); 
 
 app.config(function($routeProvider) {
     $routeProvider

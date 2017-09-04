@@ -2,23 +2,28 @@ module.exports = function($scope, $http) {
     //console.log('example iso string date: ',new Date().toISOString())
     $scope.income = 0;
     $scope.date = new Date();
-    $scope.category = 'job'; //defaulting to job
-    $scope.desc = 'desc';
+    $scope.category = 'Job'; //defaulting to job
+    $scope.desc = 'Raytheon paycheck';
 
-    $scope.submit = function() {                
+    $scope.submit = function() {           
         $scope.incomeObj = {
             income: $scope.income,
             date: $scope.date.toISOString(),
             category: $scope.category,
             desc: $scope.desc
         };
-        //console.log($scope.incomeObj);
+        console.log($scope.incomeObj);
         $http.post('/income/', $scope.incomeObj).then(function success(res) {
             console.log('successfully post income obj');
             console.log('income res: ',res);
         }, function error(res) {
             console.error('failed to post income obj');
         });
+        //reset form
+        $scope.income = 0;
+        $scope.date = new Date();
+        $scope.category = 'Job'; //defaulting to job
+        $scope.desc = 'Raytheon paycheck';    
     }
 
     //Ex format: Fri 9-1-2017
