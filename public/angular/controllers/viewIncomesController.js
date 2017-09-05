@@ -9,7 +9,8 @@ module.exports = function($scope, $http) {
     var getIncomes = function() {
         $http.get('/income/').then(function success(res) { 
             $scope.doc = '';              
-            $scope.incomes = res.data;         
+            $scope.incomes = res.data; 
+            console.log(res.data)        
             console.log('successfully got all income docs');
         }, function error(res) {
             console.log('error getting all income docs');
@@ -78,4 +79,31 @@ module.exports = function($scope, $http) {
             });
         }
     }
+
+    $scope.noConfirmDelete = function(id) {
+        console.log('deleted income doc with db id: ',id);
+        $http.delete('/income/'+id).then(function success(res) {
+            if ($scope.fromDate === null) $scope.searchAll();
+            else $scope.search();
+            console.log('income delete success');
+        }, function error(res) {
+            console.log('income delete error');
+        });
+    }
+
+    $scope.massDelete = function() {
+        if (confirm('Mass delete docs?')) {
+            var numIncomes = $scope.incomes.length;
+            for (index=0; index<numIncomes; index++) {
+                if (document.getElementById('massDelete'+index).checked) {
+                    $scope.noConfirmDelete($scope.incomes[index]._id);
+                }
+            }    
+        }
+    }
+
+    //enable checkbox tooltip
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip({html:true});
+    });
 }

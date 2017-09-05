@@ -7,6 +7,7 @@
     </div>
     <input type="button" value="Search" class="btn btn-primary" ng-click="search()">
     <input type="button" value="Search All" class="btn btn-primary" ng-click="searchAll()">
+    <input type="button" value="Mass Delete" class="btn btn-danger" ng-click="massDelete()">    
 </form>
 <div class="panel-group">
     <div class="panel panel-info" ng-repeat="doc in incomes">
@@ -20,7 +21,8 @@
                         <option value="Hustling">Hustling</option>        
                     </select>
                 </div>
-                <div class="form-group"><label>Description: </label><input type="text" ng-model="doc.desc" id="desc{{$index}}" readonly></div>                
+                <div class="form-group"><label>Description: </label><input type="text" ng-model="doc.desc" id="desc{{$index}}" readonly></div>  
+                <input type="checkbox" id="massDelete{{$index}}" style="float:right;" data-toggle="tooltip" title="Check to mass delete income forms&#013Once checked, use Mass Delete button">                
                 <div class="btn-group btn-group-xs" style="float:right;">
                     <button id="edit{{$index}}" ng-click="edit($index)" class="btn btn-info">Edit</button>   
                     <button id="submit{{$index}}" ng-click="submit($index, doc._id)" class="btn btn-success" disabled>Submit</button>

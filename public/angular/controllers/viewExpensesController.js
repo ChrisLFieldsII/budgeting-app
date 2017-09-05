@@ -75,4 +75,31 @@ module.exports = function($scope, $http) {
             });
         }
     }
+
+    $scope.noConfirmDelete = function(id) {
+        console.log('deleted expense doc with db id: ',id);
+        $http.delete('/expense/'+id).then(function success(res) {
+            if ($scope.fromDate === null) $scope.searchAll();
+            else $scope.search();
+            console.log('expense delete success');
+        }, function error(res) {
+            console.log('expense delete error');
+        });
+    }
+
+    $scope.massDelete = function() {
+        if (confirm('Mass delete docs?')) {
+            var numExpenses = $scope.expenses.length;
+            for (index=0; index<numExpenses; index++) {
+                if (document.getElementById('massDelete'+index).checked) {
+                    $scope.noConfirmDelete($scope.expenses[index]._id);
+                }
+            }    
+        }
+    }
+
+    //enable checkbox tooltip
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip({html:true});
+    });
 }

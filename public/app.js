@@ -26,7 +26,7 @@ app.controller('incomeController', ['$scope', '$http', incomeController]);
 app.controller('viewIncomesController', ['$scope', '$http', viewIncomesController]);
 app.controller('expensesController', ['$scope', '$http', expensesController]);
 app.controller('viewExpensesController', ['$scope', '$http', viewExpensesController]);
-app.controller('overviewController', ['$scope', overviewController]);
+app.controller('overviewController', ['$scope', '$http', overviewController]);
 
 //create filters
 app.filter('dateFilter', dateFilter); //useless ATM
