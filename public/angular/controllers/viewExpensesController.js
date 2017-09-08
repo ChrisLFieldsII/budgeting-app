@@ -76,7 +76,7 @@ module.exports = function($scope, $http) {
         }
     }
 
-    $scope.noConfirmDelete = function(id) {
+    var noConfirmDelete = function(id) {
         console.log('deleted expense doc with db id: ',id);
         $http.delete('/expense/'+id).then(function success(res) {
             if ($scope.fromDate === null) $scope.searchAll();
@@ -102,7 +102,7 @@ module.exports = function($scope, $http) {
         if (confirm('Are you sure you want to delete all?')) {
             var numIncomes = $scope.expenses.length;
             for (index=0; index<numIncomes; index++) {
-                noConfirmDelete($scope.incomes[index]._id);
+                noConfirmDelete($scope.expenses[index]._id);
             }
         }
     }
