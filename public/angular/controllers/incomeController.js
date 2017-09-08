@@ -1,10 +1,23 @@
 module.exports = function($scope, $http) { 
     //console.log('example iso string date: ',new Date().toISOString())
+    var d = new Date();
+    console.log('date',d)    
+    var isoDate = d.toISOString();
+    console.log('iso date',isoDate)
+    var offSet = d.getTimezoneOffset();
+    var hrs = offSet/60;
+    var dHrs = d.getHours();
+    console.log('time zone offset',offSet)
+    console.log('hours offset', hrs)
+
+
+
     $scope.income = 0;
     $scope.date = new Date();
     $scope.category = 'Job'; //defaulting to job
     $scope.desc = 'Raytheon paycheck';
 
+    $scope.success;
     $scope.submit = function() {           
         $scope.incomeObj = {
             income: $scope.income,
@@ -14,6 +27,7 @@ module.exports = function($scope, $http) {
         };
         console.log($scope.incomeObj);
         $http.post('/income/', $scope.incomeObj).then(function success(res) {
+            $scope.success = true;
             console.log('successfully post income obj');
             console.log('income res: ',res);
         }, function error(res) {
@@ -24,51 +38,5 @@ module.exports = function($scope, $http) {
         $scope.date = new Date();
         $scope.category = 'Job'; //defaulting to job
         $scope.desc = 'Raytheon paycheck';    
-    }
-
-    //Ex format: Fri 9-1-2017
-    function formatDate(date) {
-        day = date.getDay();
-        switch (day) {
-            case 0:
-                day = 'Sun';
-                break;
-            case 1:
-                day = 'Mon';
-                break;
-            case 2:
-                day = 'Tue';
-                break;
-            case 3:
-                day = 'Wed';
-                break;
-            case 4:
-                day = 'Thur';
-                break;
-            case 5:
-                day = 'Fri';
-                break;
-            case 6:
-                day = 'Sat';
-                break;
-        }
-
-        var month = date.getMonth();
-        month += 1;
-
-        var dayNum = date.getDate()
-
-        var year = date.getFullYear();
-        return day + ' ' + month + '-' + dayNum + '-' + year;
-    }
-    
-    
-    
-    
-    function log(msgs) {
-        numMsgs = msgs.length;
-        for (i = 0; i < numMsgs; i++) {
-            console.log(msgs[i]);
-        }
     }
 }

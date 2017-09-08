@@ -40,7 +40,7 @@ app.use(function (err, req, res, next) {
     res.status(500).send('Something broke!')
 });
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 5000;
 app.listen(port, function() {
     logger.info('Magic happening on port '+port);
 });
