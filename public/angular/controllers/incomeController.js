@@ -3,6 +3,9 @@ module.exports = function($scope, $http) {
     var d = new Date();
     console.log('date',d)    
     var isoDate = d.toISOString();
+    var convertedIsoDate = d.toISOString().slice(0,23)+'+05:00'; //WORKS
+    console.log('convertedIsoDate',new Date(convertedIsoDate))
+    console.log(convertedIsoDate)
     console.log('iso date',isoDate)
     var offSet = d.getTimezoneOffset();
     var hrs = offSet/60;
@@ -11,17 +14,16 @@ module.exports = function($scope, $http) {
     console.log('hours offset', hrs)
 
 
-
+    //defaults
     $scope.income = 0;
     $scope.date = new Date();
     $scope.category = 'Job'; //defaulting to job
     $scope.desc = 'Raytheon paycheck';
 
-    $scope.success;
-    $scope.submit = function() {           
+    $scope.submit = function() {  
         $scope.incomeObj = {
             income: $scope.income,
-            date: $scope.date.toISOString(),
+            date: convertToLocal($scope.date),
             category: $scope.category,
             desc: $scope.desc
         };
@@ -38,5 +40,18 @@ module.exports = function($scope, $http) {
         $scope.date = new Date();
         $scope.category = 'Job'; //defaulting to job
         $scope.desc = 'Raytheon paycheck';    
+    }
+
+    var convertToLocal = function(date) {
+        var dateString = date.toString();
+        var offset = dateString.slice(28,33);
+        //console.log('offset',offset);
+        if (offset.slice(0,1) === '-') offset = '+'+offset.slice(1,5);
+        else offset = '-'+offset.slice(1,5);
+        //console.log('updated offset',offset);
+        offset = offset.slice(0,3)+':'+offset.slice(3,5);
+        //console.log('more updated offset',offset);
+        var convertedIsoDate = date.toISOString().slice(0,23)+offset;
+        return convertedIsoDate;        
     }
 }

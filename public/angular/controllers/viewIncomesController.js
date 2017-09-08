@@ -80,7 +80,7 @@ module.exports = function($scope, $http) {
         }
     }
 
-    $scope.noConfirmDelete = function(id) {
+    var noConfirmDelete = function(id) {
         console.log('deleted income doc with db id: ',id);
         $http.delete('/income/'+id).then(function success(res) {
             if ($scope.fromDate === null) $scope.searchAll();
@@ -96,9 +96,18 @@ module.exports = function($scope, $http) {
             var numIncomes = $scope.incomes.length;
             for (index=0; index<numIncomes; index++) {
                 if (document.getElementById('massDelete'+index).checked) {
-                    $scope.noConfirmDelete($scope.incomes[index]._id);
+                    noConfirmDelete($scope.incomes[index]._id);
                 }
             }    
+        }
+    }
+
+    $scope.deleteAll = function() {
+        if (confirm('Are you sure you want to delete all?')) {
+            var numIncomes = $scope.incomes.length;
+            for (index=0; index<numIncomes; index++) {
+                noConfirmDelete($scope.incomes[index]._id);
+            }
         }
     }
 

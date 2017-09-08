@@ -98,6 +98,15 @@ module.exports = function($scope, $http) {
         }
     }
 
+    $scope.deleteAll = function() {
+        if (confirm('Are you sure you want to delete all?')) {
+            var numIncomes = $scope.expenses.length;
+            for (index=0; index<numIncomes; index++) {
+                noConfirmDelete($scope.incomes[index]._id);
+            }
+        }
+    }
+
     //enable checkbox tooltip
     $(document).ready(function() {
         $('[data-toggle="tooltip"]').tooltip({html:true});
